@@ -1,0 +1,68 @@
+version: "3"
+
+# Taskfile for Hugo blog workflows
+# Requires: hugo installed and on PATH
+# Usage examples:
+#   task build
+#   task serve
+#   task clean
+#   task drafts:clean (run WordPress cleanup script again)
+#   task rebuild (clean + build)
+
+vars:
+  HUGO_BIN: hugo
+  OUTPUT_DIR: public
+
+tasks:
+  build:
+    desc: Build the production site (minified, no drafts).
+    cmds:
+      - "{{.HUGO_BIN}} --cleanDestinationDir --gc --minify"
+    sources:
+      - "content/**"
+      - "themes/**"
+      - "hugo.toml"
+      - "layouts/**"
+      - "assets/**"
+    generates:
+      - "{{.OUTPUT_DIR}}/index.html"
+
+  serve:
+    desc: Serve site locally with drafts and live reload.
+    cmds:
+      - "{{.HUGO_BIN}} server --buildDrafts --buildFuture --watch --disableFastRender"
+    interactive: true
+
+  clean:
+    desc: Remove generated site output directory.
+    cmds:
+      - "rm -rf {{.OUTPUT_DIR}}"
+    silent: true
+
+  rebuild:
+    desc: Clean then build production site.
+    deps: [clean]
+    cmds:
+      - "task build"
+
+  drafts:clean:
+    desc: Re-run Python cleanup script on drafts directory.
+    cmds:
+      - "python3 scripts/cleanup_drafts.py --dir drafts --verbose"
+
+  list:posts:
+    desc: List content posts (filenames only).
+    cmds:
+      - "ls -1 content/posts | head -n 50"
+
+  hugo:version:
+    desc: Show Hugo version.
+    cmds:
+      - "{{.HUGO_BIN}} version"
+
+  # Placeholder for future deployment task
+  deploy:
+    desc: Placeholder (add rsync / GitHub Pages action later).
+    cmds:
+      - echo "Add deployment logic here (e.g., git push, rsync, etc.)"
+    silent: true

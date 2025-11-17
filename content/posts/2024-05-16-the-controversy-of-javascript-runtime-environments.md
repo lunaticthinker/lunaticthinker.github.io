@@ -1,24 +1,15 @@
 ---
 title: The controversy of JavaScript runtime environments
-author: admin
 type: post
 date: 2024-05-16T23:39:51+00:00
 url: /the-controversy-of-javascript-runtime-environments/
 featured_image: /media/2015/11/dna-structure.jpg
-eltd_featured_post_meta:
-  - no
-eltd_disable_footer_meta:
-  - no
-eltd_video_type_meta:
-  - social
-eltd_hide_background_image_meta:
-  - no
 categories:
   - Home Page
   - JavaScript
 ---
 
-For nearly a decade, I have honed my skills as both a frontend and backend developer. Over the past five years, my focus has primarily been on backend development, specializing exclusively in [JavaScript][1]. 
+For nearly a decade, I have honed my skills as both a frontend and backend developer. Over the past five years, my focus has primarily been on backend development, specializing exclusively in [JavaScript][1].
 
 "Hold on, isn't JavaScript both a programming language and a standard? Actually, no. [ECMAScript][2] is the [standard][3], and [JavaScript][1] is just an implementation of that standard.
 
@@ -30,58 +21,58 @@ I'll start with JavaScript Engines. This seems like the right place to start, ri
 
 That's not necessarily a bad thing. After all, with an open standard, such diversity is to be expected. Some implementations arise from innovative ideas, while others are driven by more corporate goals (which is a polite way of saying they might be motivated by profit).
 
-So, if we travel back in time, we find that [a very smart individual][5] established the foundation for the standard, and subsequently, various entities felt compelled to implement it. Among all these engines (focusing solely on JavaScript), here is a short list of the honorable mentions. 
+So, if we travel back in time, we find that [a very smart individual][5] established the foundation for the standard, and subsequently, various entities felt compelled to implement it. Among all these engines (focusing solely on JavaScript), here is a short list of the honorable mentions.
 
 ### [V8](https://v8.dev/)
 
 An open-source, high-performance JavaScript and WebAssembly engine developed by Google (perhaps the most popular at the moment), used in the Google Chrome browser, Node.js, and various other runtime environments.
 
-* Just-In-Time (JIT) compilation for improved performance.
-* Modern ECMAScript support.<br /> Written in C++.
+- Just-In-Time (JIT) compilation for improved performance.
+- Modern ECMAScript support.<br /> Written in C++.
 
 ### [SpiderMonkey](https://spidermonkey.dev/)
 
 Mozilla's JavaScript and WebAssembly engine (perhaps the first of its kind), used in the Firefox web browser, Thunderbird, and other Mozilla projects.
 
-* Implements the latest ECMAScript standards.
-* Includes a JIT compiler, interpreter, and garbage collector.
-* Written in C++.
+- Implements the latest ECMAScript standards.
+- Includes a JIT compiler, interpreter, and garbage collector.
+- Written in C++.
 
 ### JavaScriptCore (JSC)
 
 Also known as Nitro, this is Apple's JavaScript engine, used in the Safari web browser, WebKit, and other Apple software.
 
-  * Supports the latest ECMAScript standards.
-  * Includes a JIT compiler and a low-level interpreter.
-  * Written in C++. 
+- Supports the latest ECMAScript standards.
+- Includes a JIT compiler and a low-level interpreter.
+- Written in C++.
 
 ### ChakraCore
 
 The open-source core of Microsoft's Chakra JavaScript engine, used in the Microsoft Edge browser (pre-Chromium) and other Microsoft applications.
 
-  * Implements modern ECMAScript features.
-  * Includes a JIT compiler and garbage collector.
-  * Written in C++. 
+- Implements modern ECMAScript features.
+- Includes a JIT compiler and garbage collector.
+- Written in C++.
 
 ### Hermes
 
 An open-source JavaScript engine optimized for running React Native, used primarily in React Native mobile applications.
 
-* Optimized for fast startup and memory efficiency.
-* Bytecode precompilation to reduce startup time.
-* Written in C++. 
+- Optimized for fast startup and memory efficiency.
+- Bytecode precompilation to reduce startup time.
+- Written in C++.
 
 _And others..._
 
-Is it acceptable that multiple engines exist? Absolutely. They are designed to implement (or should be implementing) the standard. Their purpose is to serve the standard and enable users to run the language. **In browsers.** After all, that's what both the standard and the language were created for, isn't it? 
+Is it acceptable that multiple engines exist? Absolutely. They are designed to implement (or should be implementing) the standard. Their purpose is to serve the standard and enable users to run the language. **In browsers.** After all, that's what both the standard and the language were created for, isn't it?
 
-Do you see any issues so far? I don't. The engine serves its purpose, the browser requires the language, and we developers are equipped with a highly capable tool to provide our customers with an excellent experience. There are no problems here. 
+Do you see any issues so far? I don't. The engine serves its purpose, the browser requires the language, and we developers are equipped with a highly capable tool to provide our customers with an excellent experience. There are no problems here.
 
-## JavaScript Runtime Environments 
+## JavaScript Runtime Environments
 
 The problem arises when the browser is no longer the sole runtime environment for this language. Notice that I've shifted the focus here. I'm no longer discussing engines; I'm now addressing runtime environments. Historically, the browser was the first runtime environment for JavaScript. Its scope was very limited, offering only minimal capabilities.
 
-At some point, we wondered: why should we use JavaScript for frontend development and a different language for the backend? Why should we need to learn more than one language to develop our applications? I won't debate whether this was a good or bad idea. The bad ideas came later. 
+At some point, we wondered: why should we use JavaScript for frontend development and a different language for the backend? Why should we need to learn more than one language to develop our applications? I won't debate whether this was a good or bad idea. The bad ideas came later.
 
 For now, let's introduce our culprits. The most popular JavaScript Runtime Environments:
 
@@ -96,7 +87,6 @@ The next-gen secure runtime for JavaScript and TypeScript, created by [Ryan Dahl
 ### [Bun](https://bun.sh/)
 
 The wonder child of runtime environments, built using [JavaScriptCore](https://docs.webkit.org/Deep%20Dive/JSC/JavaScriptCore.html) Engine, capable of running both JavaScript and TypeScript and designed for speed.
-
 
 #### Other Mentions
 
@@ -125,10 +115,10 @@ But now, let's take a look at JavaScript Runtime Environments. I'll focus on jus
 [Node.js API Docs](https://nodejs.org/docs/latest/api/fs.html#fspromisesreadfilepath-options)
 
 ```javascript
-const { readFile } = require('node:fs/promises');
+const { readFile } = require("node:fs/promises");
 
 (async function logFile() {
-  const contents = await readFile('/foo/bar.txt', { encoding: 'utf8' });
+  const contents = await readFile("/foo/bar.txt", { encoding: "utf8" });
   console.log(contents);
 })();
 ```
@@ -139,19 +129,19 @@ const { readFile } = require('node:fs/promises');
 
 ```javascript
 (async function logFile() {
-  using f = await Deno.open('/foo/bar.txt');
+  using f = await Deno.open("/foo/bar.txt");
   const buf = new Uint8Array(100);
   const numberOfBytesRead = await Deno.read(f.rid, buf);
   const text = new TextDecoder().decode(buf);
   console.log(contents);
 })();
 ```
-    
+
 ```javascript
 // or using the more direct approach
 
 (async function logFile() {
-  const content = Deno.readTextFile('/foo/bar.txt');
+  const content = Deno.readTextFile("/foo/bar.txt");
   console.log(contents);
 })();
 ```
@@ -159,19 +149,19 @@ const { readFile } = require('node:fs/promises');
 ### Bun Implementation
 
 [Bun API Docs](https://bun.sh/docs/api/file-io#reading-files-bun-file)
-    
+
 ```javascript
 (async function logFile() {
-  const content = await Bun.file('/foo/bar.txt').text();
+  const content = await Bun.file("/foo/bar.txt").text();
   console.log(contents);
 })();
 ```
-   
+
 ```javascript
 // or using the Bun.fs compatibility module for Node.js
 
 (async function logFile() {
-  const content = await Bun.fs.readFile('/foo/bar.txt', 'utf-8');
+  const content = await Bun.fs.readFile("/foo/bar.txt", "utf-8");
   console.log(contents);
 })();
 ```
@@ -188,8 +178,8 @@ Now, let's say I decide to develop a small feature (a microservice) from our app
 async function readFile(filePath) {
   // Check for Node.js and Bun (which supports require and import.meta.url)
   if (typeof require !== "undefined" && typeof module !== "undefined") {
-    const { readFile: cjsReadFile } = require('fs').promises;
-    return await cjsReadFile(filePath, 'utf8');
+    const { readFile: cjsReadFile } = require("node:fs").promises;
+    return await cjsReadFile(filePath, "utf8");
   }
   // For Deno
   else if (typeof Deno !== "undefined") {
@@ -201,7 +191,7 @@ async function readFile(filePath) {
   }
   // Fallback for unsupported environments
   else {
-    console.error('This runtime environment is not supported.');
+    console.error("This runtime environment is not supported.");
   }
 }
 
@@ -211,22 +201,22 @@ async function readFile(filePath) {
 })();
 ```
 
-Here is a read file method compatible with all three runtime environments. However, it still doesn't cover Node.js's ESM mode. What do you think of this approach? How do you think the majority of developers would react to it? 
+Here is a read file method compatible with all three runtime environments. However, it still doesn't cover Node.js's ESM mode. What do you think of this approach? How do you think the majority of developers would react to it?
 
 One potential solution could be Bun. They claim to have good compatibility with Node.js (they're not quite there yet, but they're working hard on it). However, syntax compatibility remains an issue. Even if I'm willing to give it a shot, convincing over 50 developers on the team might be a different story.
 
 In conclusion, while I appreciate the interest in developing newer and better engines or runtime environments, I also understand why they don't gain popularity overnight among developers. As long as syntax varies from one runtime to another, or even from one engine to another, migrating our code is far from simple. Convincing a team to develop new projects on a newer, supposedly better runtime environment while maintaining legacy code on the older one is, in my opinion, nearly impossible. And then there's the issue of expenses, which I don't even want to get into.
 
-While the drive to innovate and create better JavaScript engines and runtime environments is commendable, the reality of adoption is much more complex. Syntax inconsistencies between runtimes and engines make code migration a daunting task. For a project with millions of lines of code and a large team of developers, the cost and effort involved in transitioning to a new runtime environment are significant barriers. 
+While the drive to innovate and create better JavaScript engines and runtime environments is commendable, the reality of adoption is much more complex. Syntax inconsistencies between runtimes and engines make code migration a daunting task. For a project with millions of lines of code and a large team of developers, the cost and effort involved in transitioning to a new runtime environment are significant barriers.
 
-Although new runtime environments like Bun (or, the latest, WinterJs) show promise with claims of improved performance and compatibility, the practical challenges of integrating these into existing projects cannot be ignored. The technical and financial hurdles, combined with the need to maintain legacy systems, make such transitions impractical for many organizations. 
+Although new runtime environments like Bun (or, the latest, WinterJs) show promise with claims of improved performance and compatibility, the practical challenges of integrating these into existing projects cannot be ignored. The technical and financial hurdles, combined with the need to maintain legacy systems, make such transitions impractical for many organizations.
 
 Ultimately, the stability and consistency provided by established environments like Node.js, despite its performance limitations, offer a safer and more predictable path for development. As we continue to explore and evaluate new technologies, it's crucial to balance innovation with practicality, ensuring that the tools we choose align with the needs and capabilities of our teams and projects.
 
- [1]: https://en.wikipedia.org/wiki/JavaScript
- [2]: https://en.wikipedia.org/wiki/ECMAScript
- [3]: https://tc39.es/ecma262/
- [4]: https://en.wikipedia.org/wiki/List_of_ECMAScript_engines
- [5]: https://en.wikipedia.org/wiki/Brendan_Eich
- [6]: https://github.com/wasmerio/winterjs
- [7]: https://github.com/facebook/hermes
+[1]: https://en.wikipedia.org/wiki/JavaScript
+[2]: https://en.wikipedia.org/wiki/ECMAScript
+[3]: https://tc39.es/ecma262/
+[4]: https://en.wikipedia.org/wiki/List_of_ECMAScript_engines
+[5]: https://en.wikipedia.org/wiki/Brendan_Eich
+[6]: https://github.com/wasmerio/winterjs
+[7]: https://github.com/facebook/hermes

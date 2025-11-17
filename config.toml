@@ -1,0 +1,125 @@
+baseURL = 'https://lunaticthinker.github.io/'
+languageCode = 'en-us'
+title = 'LunaticThinker.me'
+theme = 'FixIt'
+
+# Pagination
+[pagination]
+pagerSize = 10
+path = 'page'
+
+# Sort posts by date descending (newest first)
+[frontmatter]
+date = ['date', 'publishDate', 'lastmod']
+lastmod = [':git', 'lastmod', 'date', 'publishDate']
+publishDate = ['publishDate', 'date']
+
+[markup]
+[markup.goldmark]
+[markup.goldmark.renderer]
+unsafe = true
+
+[taxonomies]
+category = 'categories'
+tag = 'tags'
+
+ignoreLogs = ['warning-goldmark-raw-html']
+
+[params]
+version = '0.3.X'
+description = 'Thoughts on code and poetry.'
+defaultTheme = 'auto'
+dateFormat = '2006-01-02'
+mainSections = ['posts']
+
+[params.author]
+name = 'Dragos Cirjan'
+email = ''
+link = 'https://github.com/lunaticthinker'
+
+[params.app]
+title = 'LunaticThinker.me'
+noFavicon = false
+svgFavicon = ''
+iconColor = '#5bbad5'
+tileColor = '#da532c'
+
+[params.header]
+desktopMode = 'sticky'
+mobileMode = 'auto'
+[params.header.title]
+name = 'LunaticThinker.me'
+pre = ''
+post = ''
+typeit = false
+
+[params.footer]
+enable = true
+custom = ''
+hugo = false
+copyright = true
+author = true
+since = 2008
+[params.footer.powered]
+enable = false
+[params.footer.beian]
+enable = false
+
+[params.home]
+[params.home.profile]
+enable = true
+avatarURL = ''
+title = 'LunaticThinker.me'
+subtitle = 'Thoughts on code and poetry.'
+typeit = false
+social = true
+[params.home.posts]
+enable = true
+paginate = 3
+sort = 'date'
+
+[params.social]
+GitHub = 'lunaticthinker'
+Twitter = ''
+Linkedin = ''
+
+[params.page]
+[params.page.code]
+copy = true
+maxShownLines = 20
+[params.page.math]
+enable = true
+copyTex = true
+mhchem = false
+[params.page.mermaid]
+enable = true
+
+[menu]
+[[menu.main]]
+name = 'Blog'
+url = '/posts/'
+weight = 10
+[[menu.main]]
+name = 'Clean Code'
+url = '/docs/clean-code/'
+weight = 15
+[[menu.main]]
+name = 'Coding Principles'
+url = '/docs/coding-principles/'
+weight = 16
+[[menu.main]]
+name = 'Design Patterns'
+url = '/docs/design-patterns/'
+weight = 17
+[[menu.main]]
+name = 'About'
+url = '/about/'
+weight = 20
+[[menu.main]]
+name = 'Contact'
+url = '/contact/'
+weight = 30
+[[menu.main]]
+name = 'Categories'
+url = '/categories/'
+weight = 40

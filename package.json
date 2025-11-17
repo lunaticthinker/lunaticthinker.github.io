@@ -1,0 +1,15 @@
+{
+  "type": "module",
+  "devDependencies": {
+    "@templ-project/eslint": "^1.2.2",
+    "@templ-project/prettier": "^1.0.6",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.2.6"
+  },
+  "scripts": {
+    "format": "npx -y prettier --write './**/*.{json,md}'",
+    "format:check": "npx -y prettier --check './**/*.{json,md}'",
+    "lint": "npx -y eslint --fix './**/*.{json,md}'",
+    "lint:check": "npx -y eslint './**/*.{json,md}'"
+  }
+}
