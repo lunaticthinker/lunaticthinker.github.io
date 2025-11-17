@@ -2,18 +2,18 @@
 title: "Strategy Pattern"
 date: 2024-07-18
 categories:
-    - Design Patterns
+  - Design Patterns
 tags:
-    - design patterns
-    - behavioral patterns
-    - strategy
-    - algorithms
+  - design patterns
+  - behavioral patterns
+  - strategy
+  - algorithms
 bookHidden: false
 ---
 
 Any time you choose between “pay with card”, “pay with PayPal”, or “pay with bank transfer”, you’re bumping into the idea behind the **Strategy** pattern.
 
-Strategy is a behavioral design pattern that lets you define a family of algorithms, encapsulate each one, and switch between them at runtime. The client cares about *what* needs to be done, not *how* each algorithm does it.
+Strategy is a behavioral design pattern that lets you define a family of algorithms, encapsulate each one, and switch between them at runtime. The client cares about _what_ needs to be done, not _how_ each algorithm does it.
 
 ## Intent
 

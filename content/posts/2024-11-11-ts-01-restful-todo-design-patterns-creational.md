@@ -260,10 +260,10 @@ export default interface Cloneable {
 This interface ensures that any class implementing it must provide a `clone` method. Let’s apply this to the `Task` class:
 
 ```typescript
-import Cloneable from "../utils/Cloneable";
+import { v4 as uuid } from "uuid";
 import TaskInput from "./TaskInput";
 import TaskStatus from "./TaskStatus";
-import { v4 as uuid } from "uuid";
+import Cloneable from "../utils/Cloneable";
 
 export default class Task extends TaskInput implements Cloneable {
   id: string;

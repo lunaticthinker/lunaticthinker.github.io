@@ -1,0 +1,51 @@
+name: Contact Form Submission
+description: Submit a message through the website contact form
+title: "[Contact]: "
+labels: ["contact"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reaching out! Please fill out the form below.
+
+  - type: input
+    id: subject
+    attributes:
+      label: Subject
+      description: Brief description of your message
+      placeholder: What's this about?
+    validations:
+      required: true
+
+  - type: textarea
+    id: message
+    attributes:
+      label: Message
+      description: Your message
+      placeholder: Tell us what's on your mind
+    validations:
+      required: true
+
+  - type: dropdown
+    id: topic
+    attributes:
+      label: Topic
+      description: What category does this fall under?
+      options:
+        - Question
+        - Feedback
+        - Collaboration
+        - Bug Report
+        - Other
+      default: 0
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: verification
+    attributes:
+      label: Verification
+      description: Please confirm you are a human
+      options:
+        - label: I am not a robot
+          required: true

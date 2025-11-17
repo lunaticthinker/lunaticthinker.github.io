@@ -2,12 +2,12 @@
 title: "Template Method Pattern"
 date: 2024-07-19
 categories:
-    - Design Patterns
+  - Design Patterns
 tags:
-    - design patterns
-    - behavioral patterns
-    - template method
-    - inheritance
+  - design patterns
+  - behavioral patterns
+  - template method
+  - inheritance
 bookHidden: false
 ---
 

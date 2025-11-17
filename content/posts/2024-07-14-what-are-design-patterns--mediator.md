@@ -3,22 +3,21 @@ title: "Mediator Pattern"
 draft: false
 bookHidden: true
 ---
+
 ---
+
 title: "Mediator Pattern"
 date: 2024-07-14
-categories:
-    - Design Patterns
-tags:
-    - design patterns
-    - behavioral patterns
-    - mediator
-    - architecture
+categories: - Design Patterns
+tags: - design patterns - behavioral patterns - mediator - architecture
 bookHidden: false
+
 ---
 
 The **Mediator** pattern steps in when objects are talking to each other so much that your code starts to look like a group chat gone wrong.
 
 It’s a behavioral pattern that centralizes communication between objects. Instead of every component knowing about every other component, they all talk through a mediator, which coordinates interactions and keeps dependencies under control.
+
 ## Problem and Solution
 
 ### Problem

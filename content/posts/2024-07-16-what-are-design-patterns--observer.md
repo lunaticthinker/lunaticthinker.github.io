@@ -2,12 +2,12 @@
 title: "Observer Pattern"
 date: 2024-07-16
 categories:
-    - Design Patterns
+  - Design Patterns
 tags:
-    - design patterns
-    - behavioral patterns
-    - observer
-    - events
+  - design patterns
+  - behavioral patterns
+  - observer
+  - events
 bookHidden: false
 ---
 

@@ -2,12 +2,12 @@
 title: "State Pattern"
 date: 2024-07-17
 categories:
-    - Design Patterns
+  - Design Patterns
 tags:
-    - design patterns
-    - behavioral patterns
-    - state
-    - workflow
+  - design patterns
+  - behavioral patterns
+  - state
+  - workflow
 bookHidden: false
 ---
 

@@ -2,12 +2,12 @@
 title: "Memento Pattern"
 date: 2024-07-15
 categories:
-    - Design Patterns
+  - Design Patterns
 tags:
-    - design patterns
-    - behavioral patterns
-    - memento
-    - undo
+  - design patterns
+  - behavioral patterns
+  - memento
+  - undo
 bookHidden: false
 ---
 

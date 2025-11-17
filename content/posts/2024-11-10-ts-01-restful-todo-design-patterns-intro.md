@@ -187,9 +187,9 @@ The `actions.ts` file serves as a controller, mapping each endpoint to its corre
 
 ```typescript
 import { NextFunction, Request, Response } from "express";
+import { v4 as uuid } from "uuid";
 import Database from "./database";
 import Task from "./models/task";
-import { v4 as uuid } from "uuid";
 
 const database = new Database();
 

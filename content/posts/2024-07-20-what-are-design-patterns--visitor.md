@@ -2,18 +2,18 @@
 title: "Visitor Pattern"
 date: 2024-07-20
 categories:
-    - Design Patterns
+  - Design Patterns
 tags:
-    - design patterns
-    - behavioral patterns
-    - visitor
-    - extensibility
+  - design patterns
+  - behavioral patterns
+  - visitor
+  - extensibility
 bookHidden: false
 ---
 
 Every time you think “I need to run a bunch of different operations over this object hierarchy, but I really don’t want to keep changing those classes”, you’re in Visitor territory.
 
-The **Visitor** pattern is a behavioral design pattern that lets you add new operations to a group of related classes *without* modifying their source. Operations live in visitor classes; your data structures just agree to “accept” them.
+The **Visitor** pattern is a behavioral design pattern that lets you add new operations to a group of related classes _without_ modifying their source. Operations live in visitor classes; your data structures just agree to “accept” them.
 
 ## Intent
 
