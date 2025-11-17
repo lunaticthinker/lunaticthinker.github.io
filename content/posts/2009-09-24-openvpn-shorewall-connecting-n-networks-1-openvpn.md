@@ -1,7 +1,6 @@
 ---
 title: "OpenVPN / Shorewall – connecting N networks [#1 OpenVPN]"
 author: dragos
-type: post
 date: 2009-09-24T11:43:25+00:00
 url: /openvpn-shorewall-connecting-n-networks-1-openvpn/
 featured_image: /media/2010/12/openvpn.jpg

@@ -16,6 +16,7 @@ I’ve spent enough hours untangling legacy code to see how quietly entropy spre
 
 For each principle you get: intent, indicators, refactor moves, examples, and trade‑offs. Use what solves the pain in front of you; ignore the rest until it hurts.
 
+So what are coding principles, exactly? In this article, I’m using the term to mean shared heuristics for writing and shaping code: compact rules of thumb that help multiple people on a team make compatible design decisions over time. They are not laws or style‑guide pedantry; they are reusable decision patterns that reduce surprise, keep behavior consistent, and make change cheaper. A good principle gives you a way to name a kind of problem ("this is a DRY violation", "this is YAGNI") and a default direction for fixing it.∂
 
 Practice:
 
@@ -25,45 +26,60 @@ Practice:
 
 <!--more-->
 
-## 1. DRY (Don’t Repeat Yourself)
+## 1. DRY (Don't Repeat Yourself)
 
-I want one authoritative spot for each business rule so when, say, a tax rate changes I edit it once—not chase ghosts through six files.
+Here's what I'm after: one single source of truth for each business rule. When a tax rate changes, I want to edit it in one place—not hunt through six files wondering which ghosts I've missed.
 
-What I watch for:
+What tells me I need this:
 
-- Multiple similar validation snippets.
-  function sort(data: number[]): number[] { return [...data].sort((a,b)=>a-b) }
-- Divergent literals representing the same policy value.
-- Copy‑paste edits across several files for one fix.
+- I see the same validation logic copy-pasted in multiple spots.
+- The same magic number or policy value appears in different places.
+- Every bug fix requires identical edits across several files.
 
-How I usually fix it:
+How I typically fix it:
 
-1. Identify semantic (not just textual) duplication.
-2. Consolidate into a named function/constant/value object.
-3. Generalize only after the third real occurrence (rule of three).
-4. Stop short of speculative frameworks.
+1. Look for semantic duplication, not just identical code. Sometimes the pattern is hidden.
+2. Extract it into a well-named function, constant, or value object.
+3. Wait for the third occurrence before generalizing (the "rule of three").
+4. Resist the urge to build speculative frameworks.
 
 Example (JavaScript → Python):
 
-````javascript
+```javascript
 // Before
-function register(email){ if(!/^[^@]+@[^@]+$/.test(email)) throw Error('email'); }
+function register(email) {
+  if (!/^[^@]+@[^@]+$/.test(email)) throw Error("email");
+}
+
+// After: shared pattern + validation helper
 const EMAIL_PATTERN = /^[^@]+@[^@]+$/;
-  Speculative Smells:
 
-  - Interfaces with a single implementation and no foreseeable variation.
-  - Configuration flags without active code paths.
-  - Abstraction naming using “Base”, “Manager”, “Factory” absent multiple consumers.
-function ensureEmail(e){ if(!EMAIL_PATTERN.test(e)) throw Error('email'); }
-function register(email){ ensureEmail(email); }
+function ensureEmail(e) {
+  if (!EMAIL_PATTERN.test(e)) throw Error("email");
+}
+
+function register(email) {
+  ensureEmail(email);
+}
+```
+
+Speculative smells I watch for:
+
+- Interfaces with a single implementation and no foreseeable variation.
+- Configuration flags without active code paths.
+- Abstractions named "Base", "Manager", or "Factory" without multiple real consumers.
+
 ```python
-EMAIL_PATTERN = re.compile(r'^[^@]+@[^@]+$')
-def ensure_email(e: str):
-  if not EMAIL_PATTERN.match(e):
-    raise ValueError('email')
-````
+import re
 
-When I bend it: in early spikes or for a deliberate high‑performance fork—always with a short note explaining why.
+EMAIL_PATTERN = re.compile(r"^[^@]+@[^@]+$")
+
+def ensure_email(e: str) -> None:
+    if not EMAIL_PATTERN.match(e):
+        raise ValueError("email")
+```
+
+When I break this rule: During early exploratory work when I'm still figuring things out, or when I need a performance optimization that requires duplication. Always leave a comment explaining why—your teammates (and future you) will need it.
 
 | Dimension | Effect | Notes |
 function sort(data: number[]): number[] { return [...data].sort((a,b)=>a-b) }
@@ -136,18 +152,19 @@ def validate_email(e: str) -> None:
 
 ## 2. KISS (Keep It Simple, Stupid)
 
-I try to strip accidental complexity and let the unavoidable logic stand out cleanly.
+My goal here is simple: strip away the accidental complexity so the essential logic can breathe. Let the unavoidable hard parts stand out clearly instead of drowning in ceremony.
 
-What tells me it’s not simple:
+What tells me something's too complex:
 
-- Deep nesting and long conditional ladders.
-- Clever one‑liners that slow scanning.
+- Deep nesting that forces me to track mental stack frames.
+- Conditional ladders that go on forever.
+- Clever one-liners that make me pause and decode.
 
 How I simplify:
 
-1. Add guard clauses to flatten structure.
-2. Remove indirection layers with no logic.
-3. Expand clever expressions into named steps.
+1. Add guard clauses at the top to flatten the structure.
+2. Delete indirection layers that add no value.
+3. Expand cryptic expressions into named, readable steps.
 
 Example (Java):
 
@@ -174,7 +191,7 @@ public User load(Id id){
 }
 ```
 
-When Bending Is Acceptable: Inherently complex domain logic (e.g., regulatory calculations) where simplification would distort rules—prefer explicit invariants + tests.
+When complexity is unavoidable: Some domain logic is genuinely complex—think tax calculations or regulatory requirements. Simplifying would distort the rules. In these cases, embrace the complexity but make invariants explicit and back them with solid tests.
 
 Complexity Metrics: Cyclomatic Complexity (CC), nesting depth, parameter count. Rising metrics correlate with elevated defect discovery latency.
 
@@ -498,21 +515,21 @@ When to Bend It:
   | Mutation Score | Quality of tests beyond raw coverage. |
   | Review Latency | Organizational friction; rising suggests clarity issues. |
 
-## 3. YAGNI (You Aren’t Gonna Need It)
+## 3. YAGNI (You Aren't Gonna Need It)
 
-I refuse to build abstractions until real variation shows up; unused scaffolding is just future drag.
+I've learned this the hard way: don't build abstractions until you actually need them. Real variation should drive your design choices, not hypothetical future scenarios. Unused scaffolding isn't preparation—it's technical debt waiting to confuse someone.
 
-Indicators:
+Signs you're over-engineering:
 
-- Interfaces with a single implementation.
-- Dormant feature flags / toggles.
-- Generic base types without consumers.
+- Interfaces with only one implementation and no concrete plans for more.
+- Feature flags sitting dormant in the codebase.
+- Generic base types with zero consumers.
 
-Practice:
+What works for me:
 
-1. Implement for current, confirmed requirements.
-2. Introduce pattern only after distinct variants appear.
-3. Cull unused scaffolding periodically.
+1. Build for the requirements you have now, not the ones you imagine.
+2. Introduce patterns only after you've seen the variation appear at least twice.
+3. Regularly prune unused abstractions—they age poorly.
 
 Example (TypeScript):
 
@@ -670,15 +687,15 @@ When to Bend It:
 
 ## 5. Separation of Concerns (SoC)
 
-I separate UI, orchestration, domain rules, and infrastructure so each can evolve or be swapped without collateral damage.
+The idea is straightforward: separate your UI from orchestration, domain rules from infrastructure. When you do this well, you can evolve or swap any layer without causing collateral damage elsewhere.
 
-Typical Layers: Transport (HTTP/UI), Application (use case orchestration), Domain (rules), Infrastructure (DB, external APIs).
+The layers typically look like this: Transport (HTTP/UI), Application (use case orchestration), Domain (business rules), Infrastructure (database, external APIs).
 
-My extraction flow:
+My process for extracting concerns:
 
-1. Spot mixed responsibilities (persistence + notification, etc.).
-2. Pull each concern into a dedicated component.
-3. Keep orchestration thin and declarative.
+1. Spot where responsibilities are tangled together—like persistence mixed with notifications.
+2. Pull each concern into its own dedicated component.
+3. Keep your orchestration layer thin and declarative, like a table of contents.
 
 Example (JavaScript):
 
@@ -817,13 +834,13 @@ When to Bend It:
 
 ## 7. Composition Over Inheritance
 
-I prefer composing small parts over climbing deep inheritance trees; delegation lets me evolve behavior without fragile parent classes.
+Inheritance trees get messy fast. I prefer composing small, focused parts instead of climbing fragile class hierarchies. Delegation gives you flexibility without the brittleness of parent-child coupling.
 
-Refactor Flow:
+My refactoring approach:
 
-1. Identify added behavior in subclass.
-2. Replace inheritance with delegation.
-3. Keep interfaces minimal.
+1. Identify the new behavior you added in a subclass.
+2. Replace that inheritance relationship with delegation to a separate component.
+3. Keep your interfaces minimal—expose only what's needed.
 
 Example (Java):
 
@@ -882,13 +899,13 @@ When to Bend It:
 
 ## 8. Fail Fast
 
-I like failures to surface early at clear boundaries so downstream code can assume sane inputs.
+I want failures to show themselves immediately, at clear boundaries, before they can propagate. When you catch problems early, downstream code gets to make a beautiful assumption: its inputs are valid.
 
-Practice Steps:
+What I do:
 
-1. Validate at public entry points.
-2. Use value objects enforcing invariants.
-3. Assert internal impossibilities.
+1. Validate rigorously at public entry points—your API surface.
+2. Use value objects that enforce their own invariants on construction.
+3. Add assertions for states that should be impossible internally.
 
 Example (Rust):
 
@@ -933,7 +950,7 @@ When to Bend It:
 
 ## 9. Encapsulation / Information Hiding
 
-I hide representation so I can strengthen or alter invariants later without forcing a cascade of edits elsewhere.
+Hide your internal representation. This gives you freedom to strengthen invariants or refactor internals later without triggering a cascade of edits across your entire codebase.
 
 Example (Kotlin):
 
@@ -1032,13 +1049,13 @@ When to Bend It:
 
 ## 11. Testability
 
-I design code so its behavior is easy to probe; fast, clear tests are my license to refactor aggressively.
+I design code to be easily testable because fast, clear tests are my safety net for aggressive refactoring. Without them, I'm paralyzed—afraid to touch anything.
 
-Enablers:
+What enables this:
 
-- Pure functions for logic.
-- Inject collaborators (clock, database) instead of hardcoding them.
-- Clear boundaries: external effects wrapped, core logic isolated.
+- Pure functions for your core logic—no hidden state or side effects.
+- Inject collaborators (like clocks or databases) instead of hardcoding them.
+- Draw clear boundaries: wrap external effects, isolate your business logic.
 
 Example (Go):
 
@@ -1132,20 +1149,20 @@ Advanced (use when team matures): Instability (coupling ratio), churn vs complex
 
 These five principles collectively enhance evolvability:
 
-| Principle | Definition                                                |
-| --------- | --------------------------------------------------------- |
-| SRP       | A unit has exactly one reason to change.                  |
-| OCP       | Extend behavior without modifying stable code.            |
-| LSP       | Subtypes honor the contracts of supertypes.               |
-| ISP       | Clients depend only on methods they actually use.         |
-| DIP       | High-level policy depends on abstractions, not concretes. |
+| Principle | Definition                                                                                                                                   |
+| --------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| SRP       | A unit has exactly one reason to change. [Deep dive →](/posts/2024-06-16-what-are-coding-principles--single-responsibility/)                 |
+| OCP       | Extend behavior without modifying stable code. [Deep dive →](/posts/2024-06-17-what-are-coding-principles--open-closed/)                     |
+| LSP       | Subtypes honor the contracts of supertypes. [Deep dive →](/posts/2024-06-18-what-are-coding-principles--liskov-substitution/)                |
+| ISP       | Clients depend only on methods they actually use. [Deep dive →](/posts/2024-06-20-what-are-coding-principles--interface-segregation/)        |
+| DIP       | High-level policy depends on abstractions, not concretes. [Deep dive →](/posts/2024-06-22-what-are-coding-principles--dependency-inversion/) |
 
 Treat SOLID as a cohesion and dependency stabilizing scaffold; deeper analysis deferred to focused articles.
 
 ## Conclusion
 
-Principles are leverage tools, not ends in themselves. Start with a concrete hotspot (e.g., duplicated validation, a 150‑line function, an unstable dependency) and apply the minimum principle pressure to reduce future change cost. Measure improvement by reduced review time or fewer edit sites per change.
+Treat these principles as tools, not destinations. Start with a specific pain point: duplicated validation, a 150-line function, an unstable dependency. Apply just enough principle-driven pressure to reduce the cost of future changes. Measure success by shorter review times and fewer files touched per change.
 
-Suggested Exercise: Select one module and: (1) shorten its longest function, (2) centralize a duplicated constant, (3) rename the least clear identifier. Re-assess clarity with a peer review.
+Here's a simple exercise: Pick one module. Shorten its longest function. Centralize one duplicated constant. Rename the least clear identifier. Then get a peer review and see if clarity improved.
 
-Apply incrementally; sustained small improvements compound.
+Small improvements, applied consistently, compound into significant gains. Start small. Stay steady. The results will speak for themselves.

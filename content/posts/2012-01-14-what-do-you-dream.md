@@ -1,7 +1,6 @@
 ---
 title: What do you dream?
 author: dragos
-type: post
 date: 2012-01-13T22:06:04+00:00
 url: /what-do-you-dream/
 categories:

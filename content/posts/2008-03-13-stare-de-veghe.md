@@ -1,7 +1,6 @@
 ---
 title: Stare de veghe
 author: dragos
-type: post
 date: 2008-03-13T11:59:01+00:00
 url: /stare-de-veghe/
 categories:

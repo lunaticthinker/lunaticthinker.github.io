@@ -1,26 +1,41 @@
 ---
 title: "State Pattern"
-draft: false
-bookHidden: true
+date: 2024-07-17
+categories:
+    - Design Patterns
+tags:
+    - design patterns
+    - behavioral patterns
+    - state
+    - workflow
+bookHidden: false
 ---
 
-# State Pattern
+You’ve probably written code where an object’s behavior depends on some `status` or `mode` field — and then watched a simple `if` turn into a giant nested `if/else` or `switch` as features grew.
 
-The **State** pattern is a behavioral design pattern that allows an object to alter its behavior when its internal state changes. It encapsulates state-specific behavior in separate classes and delegates state-dependent tasks to the current state object, promoting flexibility and modularity.
+The **State** pattern is a behavioral design pattern that tackles this problem head‑on. It lets an object change its behavior when its internal state changes by delegating work to separate state objects, instead of scattering conditionals everywhere.
 
 ## Intent
 
-**The main intent of the State pattern is to allow an object to change its behavior when its internal state changes, making the object appear to change its class.** This pattern eliminates the need for complex conditional logic by organizing state-specific behavior into distinct state classes.
+Allow an object to change its behavior when its internal state changes, **without** relying on big conditional blocks. From the outside, the object can feel like it “changes class” just by swapping its current state implementation.
 
 ## Problem and Solution
 
 ### Problem
 
-Consider a document editor where a document can be in different states such as Draft, Moderation, and Published. Each state has its own behavior for actions like editing, approving, and publishing. Without the State pattern, you’d need multiple conditional checks to handle behavior based on the document’s current state, resulting in inflexible, hard-to-maintain code.
+Take a document editor where a document can be Draft, in Moderation, or Published. Each state changes how actions behave: can you edit? can you publish? can you unpublish?
+
+If you model this with a single `status` field, you quickly end up with:
+
+- `if (status == DRAFT) { ... }`
+- `else if (status == MODERATION) { ... }`
+- `else if (status == PUBLISHED) { ... }`
+
+scattered all over the codebase. Adding a new state means touching many places and hoping you don’t miss one.
 
 ### Solution
 
-The State pattern addresses this by encapsulating each state (Draft, Moderation, Published) in its own class that defines specific behavior for each action. The document delegates state-dependent behavior to the current state object, allowing seamless switching between states without complex conditionals.
+With State, each state (Draft, Moderation, Published) becomes its own class that implements the same interface. The document delegates behavior to its current state object, and transitions are modeled as switching that state. No giant `if` chains, and adding a new state means adding a new class, not editing existing logic.
 
 ## Structure
 
@@ -32,7 +47,7 @@ The State pattern typically includes:
 
 ## UML Diagram
 
-```
+```text
 +------------------+       +---------------------+
 |    Context       |       |      State          |
 |------------------|       |---------------------|

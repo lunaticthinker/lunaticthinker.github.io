@@ -1,40 +1,47 @@
 ---
-title: "What are Coding Principles - The Liskov Substitution Principle (LSP)"
+title: "Liskov Substitution Principle: Don’t Surprise Your Callers"
+date: 2024-06-18
 categories:
   - Coding Principles
-  - Home Page
-bookHidden: true
+tags:
+  - solid
+  - clean code
+  - software design
+  - inheritance
+  - best practices
 ---
 
-# Liskov Substitution Principle (LSP)
+The Liskov Substitution Principle (LSP) is the quiet backbone of safe inheritance. It’s the “L” in SOLID, and it answers one simple question:
 
-The Liskov Substitution Principle (LSP) is the third principle in the SOLID principles of object-oriented design. It states:
+> If I swap a base class instance with a subclass instance, does everything still behave correctly?
 
-**“Objects of a superclass should be replaceable with objects of a subclass without affecting the correctness of the program.”**
+Formally, LSP says: objects of a superclass should be replaceable with objects of a subclass **without** breaking the program. In practice, it’s about making sure your subclasses don’t surprise anyone who already understands the base type.
 
-In other words, if class `B` is a subclass of class `A`, then instances of `A` should be replaceable by instances of `B` without altering the program's behavior. LSP ensures that a derived class can stand in for its base class without breaking functionality, making inheritance more predictable and reliable.
+## Why LSP Matters
 
-## Why Use the Liskov Substitution Principle?
+When LSP is violated, things break in ways that are frustrating and subtle. The type system says “this is fine,” but reality says otherwise.
 
-Violations of LSP can lead to unexpected bugs and breakages when subclasses behave differently from their base classes. Adhering to LSP helps:
+Following LSP helps you:
 
-1. **Ensure Consistency**: Subclasses are expected to behave consistently with their base classes.
-2. **Maintain Predictability**: LSP allows for predictable behavior, so consumers of the base class don’t need to know about subclass-specific details.
-3. **Enhance Code Reusability**: By ensuring that subclasses don’t violate the expectations of their base classes, we promote reusable code that’s easier to extend.
+**Keep behavior consistent.** If something claims to be a `Rectangle`, it should act like one. Callers shouldn’t need to know which specific subtype they’re holding.
 
-## Key Concepts of LSP
+**Preserve predictability.** Code that depends on a base type should not need special cases for particular subclasses.
 
-1. **Behavioral Consistency**: Subclasses should not change the expected behavior of methods inherited from the base class.
-2. **Subtype Polymorphism**: LSP enables polymorphism by ensuring that subclasses can be used interchangeably with their base class.
-3. **No Weakened Preconditions or Strengthened Postconditions**: Subclasses should not impose stricter conditions than the base class (preconditions) or give stronger guarantees on the result (postconditions).
+**Improve reuse.** When subclasses truly honor the base contract, you can plug them into existing code paths with confidence instead of defensive checks everywhere.
 
-## LSP in Action
+## The Core Ideas Behind LSP
 
-Let’s explore an example to see how LSP works and what happens when it’s violated.
+You can think of LSP as a behavioral contract layered on top of the type system:
 
-### Without LSP: Violation Example
+**Behavioral consistency.** Subclasses shouldn’t change what methods _mean_. They can extend behavior, but not break expectations.
 
-Consider a `Rectangle` class with `width` and `height` properties, and a `Square` subclass that inherits from it.
+**Polymorphism that actually works.** The whole point of polymorphism is being able to treat different implementations the same way. LSP is what makes that safe.
+
+**Don’t tighten preconditions or promises.** Subclasses shouldn’t require _more_ from callers (stricter preconditions) or promise something fundamentally _different_ in return (stronger or incompatible postconditions).
+
+## A Classic Violation: Rectangle vs Square
+
+Let’s start with the textbook example and see where things go wrong.
 
 ```java
 class Rectangle {
@@ -58,35 +65,36 @@ class Square extends Rectangle {
     @Override
     public void setWidth(int width) {
         this.width = width;
-        this.height = width; // Square has equal width and height
+        this.height = width; // force equality
     }
 
     @Override
     public void setHeight(int height) {
         this.height = height;
-        this.width = height; // Square has equal width and height
+        this.width = height; // force equality
     }
 }
 ```
 
-In this example:
+The `Square` class is trying to enforce its invariant: equal sides. But it’s doing so by silently changing how `setWidth` and `setHeight` behave compared to `Rectangle`.
 
-- The `Square` class overrides `setWidth` and `setHeight` to ensure that the width and height remain equal, as squares require.
-- However, this breaks the expected behavior of the `Rectangle` class. For example, if a function expects a `Rectangle` but is passed a `Square`, setting only the `width` or `height` will produce incorrect results.
+Now consider a function that works with `Rectangle`:
 
 ```java
 public void resizeRectangle(Rectangle rectangle) {
     rectangle.setWidth(5);
     rectangle.setHeight(10);
-    assert rectangle.getArea() == 50; // This fails for Square
+    assert rectangle.getArea() == 50; // expectation for rectangles
 }
 ```
 
-In this case, using `Square` in place of `Rectangle` causes unexpected behavior, violating LSP.
+Pass in a `Rectangle` and the assertion holds. Pass in a `Square` and it fails, because the calls force both sides to be 10. The type system is happy, but behavior is broken.
 
-### With LSP: Corrected Example
+That’s an LSP violation: a `Square` cannot safely stand in for a `Rectangle` in code that relies on the base type’s contract.
 
-To satisfy LSP, we should avoid making `Square` a subclass of `Rectangle` because a square is not a type of rectangle in terms of the expected behavior of width and height properties. Instead, we can create separate classes that share a common interface.
+## Fixing It: Separate Types, Shared Abstraction
+
+The root issue is the inheritance relationship itself. A square isn’t a rectangle _in terms of this API’s expectations_. So we model them as separate shapes sharing a common interface.
 
 ```java
 interface Shape {
@@ -94,8 +102,8 @@ interface Shape {
 }
 
 class Rectangle implements Shape {
-    protected int width;
-    protected int height;
+    private final int width;
+    private final int height;
 
     public Rectangle(int width, int height) {
         this.width = width;
@@ -108,7 +116,7 @@ class Rectangle implements Shape {
 }
 
 class Square implements Shape {
-    private int side;
+    private final int side;
 
     public Square(int side) {
         this.side = side;
@@ -120,17 +128,13 @@ class Square implements Shape {
 }
 ```
 
-Now:
+Now both `Rectangle` and `Square` are honest about what they are. They implement the same `Shape` contract, and any function that needs “something with an area” can accept `Shape` without worrying about the details.
 
-- `Rectangle` and `Square` implement a common `Shape` interface, rather than `Square` inheriting from `Rectangle`.
-- Both classes provide an `getArea` method, so either can be used interchangeably where a `Shape` is expected.
-- This approach avoids violating LSP, as the behavior of `Square` and `Rectangle` no longer conflict.
+Instead of inheriting and fighting the base class behavior, we introduce an abstraction that matches the shared semantics.
 
-### LSP in Real-World Applications
+## A More Realistic Violation: Read‑Only Documents
 
-Let’s consider a practical scenario involving document processing.
-
-Suppose we have a base class `Document` with a method `print` and a derived class `ReadOnlyDocument` that represents read-only documents.
+Here’s a scenario that’s closer to day‑to‑day work.
 
 ```java
 class Document {
@@ -151,14 +155,13 @@ class ReadOnlyDocument extends Document {
 }
 ```
 
-In this example:
+`ReadOnlyDocument` compiles and technically “is a” `Document`, but it blows up when you call `save`. Any code that relies on `Document` being saveable now has to tiptoe around this subclass.
 
-- `ReadOnlyDocument` violates LSP because it changes the expected behavior of the `save` method.
-- If a function that processes `Document` objects tries to save a `ReadOnlyDocument`, it will encounter an exception.
+You’ve created a type that advertises behavior it doesn’t actually support.
 
-#### Solution
+### Refactoring Toward LSP
 
-To fix this, we can refactor by separating the behavior using interfaces.
+We can fix this by expressing capabilities as separate interfaces instead of baking them into a single base class.
 
 ```java
 interface Printable {
@@ -186,28 +189,44 @@ class ReadOnlyDocument implements Printable {
 }
 ```
 
-This approach ensures that `ReadOnlyDocument` and `EditableDocument` conform to LSP, as each class now has methods that are specific to its functionality.
+Now a piece of code that expects something `Saveable` can rely on `save()` working. A `ReadOnlyDocument` no longer pretends to support saving, so it can’t violate the contract.
 
-## Benefits and Challenges of LSP
+LSP is restored by aligning types with what they truly guarantee.
 
-### Benefits
+## Benefits and Trade‑Offs
 
-1. **Improved Predictability**: Clients can use subclasses without needing to know their specific details, as behavior is consistent across the hierarchy.
-2. **Enhanced Code Reusability**: By following LSP, subclasses can be seamlessly reused where base classes are expected.
-3. **Reduced Bugs**: Violations of LSP can introduce subtle bugs, so adherence to LSP reduces the likelihood of unexpected behavior.
+### What You Gain
 
-### Challenges
+**Predictable behavior.** Callers can trust that a subtype won’t secretly break base type promises.
 
-1. **Complex Hierarchies**: LSP can be challenging in complex hierarchies where subclass-specific behaviors conflict with base class expectations.
-2. **Increased Design Overhead**: LSP requires careful planning of class hierarchies and interfaces, which can add complexity to the design phase.
-3. **Potential for Over-Refactoring**: Strict adherence to LSP can sometimes lead to over-refactoring, where the desire for compliance introduces excessive interfaces or classes.
+**Safer reuse.** You can introduce new implementations without sprinkling special‑case logic everywhere.
 
-## Best Practices for Implementing LSP
+**Fewer subtle bugs.** Many painful defects come from “it compiled, but the behavior changed.” LSP pushes you to surface those mismatches at design time.
 
-1. **Test Substitutability**: Regularly test that subclasses can replace base classes without changing behavior, especially if the base class has defined contracts or invariants.
-2. **Favor Composition Over Inheritance**: Where LSP is difficult to achieve, consider using composition rather than inheritance to share functionality without inheriting unwanted behavior.
-3. **Avoid Overloading Subclass Responsibilities**: Limit the responsibilities of subclasses to avoid conflicts with base class expectations.
+### What It Costs
 
-## Conclusion
+**More design thought.** You need to think about contracts, invariants, and whether inheritance is even the right tool.
 
-The Liskov Substitution Principle is essential for creating robust, extendable, and reusable class hierarchies. By adhering to LSP, we ensure that subclasses behave in a way that is consistent with their base classes, allowing for predictable and interchangeable code. Though it may require extra design considerations, LSP ultimately leads to software that is more flexible, maintainable, and less prone to errors.
+**Refactoring complex hierarchies.** Fixing long‑lived inheritance trees to respect LSP can be non‑trivial.
+
+**Risk of over‑abstraction.** In the name of purity, it’s easy to invent too many interfaces and indirections. As always, balance matters.
+
+## Working With LSP Day to Day
+
+You don’t need formal proofs to benefit from LSP. A few habits go a long way:
+
+**Ask “can this really substitute?”** When you add a subclass, mentally run through how existing code uses the base type. Would anything break in surprising ways?
+
+**Favor composition when in doubt.** If you’re struggling to make a subclass obey the base contract, that’s a strong signal to stop inheriting and start composing.
+
+**Keep subclass responsibilities narrow.** The more extra behavior you pile on, the easier it is to accidentally violate expectations.
+
+**Test substitutability.** Write tests that exercise your code using the base type, then run them with each subtype. If only some subclasses pass, you’ve likely got an LSP problem.
+
+## The Bottom Line
+
+LSP is about honesty in your type relationships.
+
+If a class claims to be usable wherever its base type is expected, it should behave accordingly. When it doesn’t, you get surprising failures, defensive code, and hierarchies that no one fully trusts.
+
+When you respect LSP—often by reshaping inheritance into better abstractions or composition—your code becomes more reliable, more reusable, and easier to reason about. Subtypes stop being landmines and start being genuine drop‑in alternatives.

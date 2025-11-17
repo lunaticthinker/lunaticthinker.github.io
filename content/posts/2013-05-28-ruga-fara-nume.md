@@ -1,7 +1,6 @@
 ---
 title: Ruga fara nume
 author: dragos
-type: post
 date: 2013-05-28T00:10:38+00:00
 url: /ruga-fara-nume/
 featured_image: /media/2013/05/black-roses-burning-sculpture.jpg

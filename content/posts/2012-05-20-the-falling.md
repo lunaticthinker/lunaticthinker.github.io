@@ -1,7 +1,6 @@
 ---
 title: The Falling
 author: dragos
-type: post
 date: 2012-05-20T20:10:56+00:00
 url: /the-falling/
 categories:

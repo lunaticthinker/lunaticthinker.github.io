@@ -1,16 +1,23 @@
 ---
 title: "Abstract Factory Pattern"
-draft: false
-bookHidden: true
+date: 2024-07-04
+categories:
+  - Design Patterns
+tags:
+  - design patterns
+  - creational patterns
+  - abstract factory
+  - architecture
+bookHidden: false
 ---
 
-# Abstract Factory Pattern
+The **Abstract Factory** pattern is one of those tools that quietly keeps large systems from turning into a mess of `if (platform == ...)` checks.
 
-The **Abstract Factory** pattern is a creational design pattern that provides an interface for creating families of related or dependent objects without specifying their concrete classes. This pattern is particularly useful when we need to enforce consistency across multiple products or components that belong to the same family.
+It’s a creational pattern that provides an interface for creating families of related or dependent objects **without** tying your code to specific concrete classes. When you want entire sets of components to vary together—UI widgets per platform, storage backends per environment—Abstract Factory gives you a clean way to do it.
 
 ## Intent
 
-**The main intent of the Abstract Factory pattern is to encapsulate a group of individual factories with a common interface.** This allows clients to create families of related objects without coupling the code to specific implementations. It promotes a more modular and scalable design by allowing the creation of product families independently of the client code.
+**The main intent of Abstract Factory is to encapsulate a group of related factories behind a single interface.** Client code talks to that interface, not to concrete classes, and gets back a coherent family of products.
 
 ## Problem and Solution
 
@@ -33,7 +40,7 @@ The Abstract Factory pattern typically includes:
 
 ## UML Diagram
 
-```
+```text
 +-------------------+       +---------------------+
 |   GUIFactory      |       |   Button           |
 |-------------------|       |---------------------|

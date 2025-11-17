@@ -1,7 +1,6 @@
 ---
 title: Ploi verzi
 author: dragos
-type: post
 date: 2008-03-13T11:58:12+00:00
 url: /ploi-verzi/
 categories:

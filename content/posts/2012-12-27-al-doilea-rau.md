@@ -1,7 +1,6 @@
 ---
 title: AL DOILEA RAU
 author: dragos
-type: post
 date: 2012-12-26T23:09:17+00:00
 url: /al-doilea-rau/
 categories:

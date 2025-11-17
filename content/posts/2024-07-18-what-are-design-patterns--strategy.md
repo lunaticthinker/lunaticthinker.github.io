@@ -1,26 +1,35 @@
 ---
 title: "Strategy Pattern"
-draft: false
-bookHidden: true
+date: 2024-07-18
+categories:
+    - Design Patterns
+tags:
+    - design patterns
+    - behavioral patterns
+    - strategy
+    - algorithms
+bookHidden: false
 ---
 
-# Strategy Pattern
+Any time you choose between “pay with card”, “pay with PayPal”, or “pay with bank transfer”, you’re bumping into the idea behind the **Strategy** pattern.
 
-The **Strategy** pattern is a behavioral design pattern that allows you to define a family of algorithms, encapsulate each algorithm, and make them interchangeable. This pattern enables clients to choose and switch algorithms dynamically without altering the objects that use them, promoting flexibility and modularity.
+Strategy is a behavioral design pattern that lets you define a family of algorithms, encapsulate each one, and switch between them at runtime. The client cares about *what* needs to be done, not *how* each algorithm does it.
 
 ## Intent
 
-**The main intent of the Strategy pattern is to enable selecting an algorithm’s behavior at runtime, allowing algorithms to vary independently from the context that uses them.** This pattern makes it easy to add, remove, or swap algorithms without modifying the client code, adhering to the Open-Closed Principle.
+Enable selecting an algorithm’s behavior at runtime so algorithms can vary independently from the context that uses them. You can add, remove, or swap strategies without editing the code that triggers them.
 
 ## Problem and Solution
 
 ### Problem
 
-Consider an application that processes payments, where different payment methods (e.g., credit card, PayPal, bank transfer) require specific processing logic. Without the Strategy pattern, the application would need conditional statements to handle each payment method, resulting in tightly coupled, hard-to-maintain code.
+Consider an application that processes payments. Different payment methods — credit card, PayPal, bank transfer — all have slightly different rules and data.
+
+If you put everything into one class with a bunch of `if (type == CREDIT_CARD) ... else if (type == PAYPAL) ...`, the code becomes harder to read, harder to extend, and easy to break.
 
 ### Solution
 
-The Strategy pattern addresses this by encapsulating each payment method as a separate strategy. The application can dynamically select and switch between payment strategies, allowing for easy addition or modification of payment methods without changing the core processing logic.
+With Strategy, each payment method lives in its own class that implements a shared `PaymentStrategy` interface. The `PaymentProcessor` just holds a reference to a strategy and calls it. Adding a new payment method becomes “add a new class” instead of “edit a big conditional in multiple places”.
 
 ## Structure
 
@@ -32,7 +41,7 @@ The Strategy pattern typically includes:
 
 ## UML Diagram
 
-```
+```text
 +------------------+       +----------------------+
 |    Context       |       |      Strategy        |
 |------------------|       |----------------------|

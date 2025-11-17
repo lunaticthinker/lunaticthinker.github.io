@@ -1,7 +1,6 @@
 ---
 title: CFML Generating Random String
 author: dragos
-type: post
 date: 2014-03-10T10:27:40+00:00
 url: /cfml-generating-random-string/
 featured_image: /media/2014/03/dna-structure-cfml.png

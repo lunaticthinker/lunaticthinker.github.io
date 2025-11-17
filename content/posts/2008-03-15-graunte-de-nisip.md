@@ -1,7 +1,6 @@
 ---
 title: graunte de nisip
 author: dragos
-type: post
 date: 2008-03-15T11:45:15+00:00
 url: /graunte-de-nisip/
 categories:

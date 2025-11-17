@@ -1,26 +1,35 @@
 ---
 title: "Observer Pattern"
-draft: false
-bookHidden: true
+date: 2024-07-16
+categories:
+    - Design Patterns
+tags:
+    - design patterns
+    - behavioral patterns
+    - observer
+    - events
+bookHidden: false
 ---
 
-# Observer Pattern
+Any time you subscribe to something — a newsletter, a Twitch stream, a weather app — you’re living in the world of the **Observer** pattern.
 
-The **Observer** pattern is a behavioral design pattern that defines a one-to-many relationship between objects so that when one object’s state changes, all dependent objects are notified and updated automatically. This pattern is commonly used in event-driven programming, GUIs, and distributed event-handling systems.
+Observer is a behavioral design pattern that defines a one‑to‑many relationship between objects so that when one object’s state changes, all dependent objects are notified automatically. It’s the backbone of event systems, GUIs, and many reactive APIs.
 
 ## Intent
 
-**The main intent of the Observer pattern is to establish a relationship between objects where changes to one object (the subject) automatically propagate to all its dependents (observers).** This pattern allows for a flexible, decoupled design where the subject and its observers can vary independently.
+Establish a clean relationship where changes to one object (the **subject**) automatically propagate to many **observers** — without the subject hard‑coding who those observers are. Everyone interested gets notified; no one is tightly coupled.
 
 ## Problem and Solution
 
 ### Problem
 
-Suppose you’re developing a weather station system that gathers weather data and displays it across multiple devices (e.g., phones, tablets, TVs). Without a way to automatically propagate updates to all devices, each device would need to constantly poll for changes, resulting in inefficient and tightly coupled code.
+Suppose you’re building a weather station system that gathers data and shows it on phones, tablets, TVs, maybe even a wall display. Without a proper mechanism, each device would have to constantly poll the station for updates, or the station would need hard‑coded references to every device.
+
+Both approaches are ugly: either you burn CPU on polling, or you create tight coupling and brittle dependencies.
 
 ### Solution
 
-The Observer pattern solves this problem by having the `WeatherStation` act as the subject and each device as an observer. Whenever the weather station updates, it notifies all registered devices (observers) of the change. This approach decouples the subject from its observers, making it easy to add or remove observers and ensuring efficient propagation of updates.
+With Observer, the `WeatherStation` acts as the subject and each device becomes an observer. Devices subscribe once; when the station updates, it simply notifies all registered observers. You can add or remove observers at runtime without changing the station’s code.
 
 ## Structure
 
@@ -32,7 +41,7 @@ The Observer pattern typically includes:
 
 ## UML Diagram
 
-```
+```text
 +------------------+       +-------------------+
 |    Subject       |       |    Observer       |
 |------------------|       |-------------------|

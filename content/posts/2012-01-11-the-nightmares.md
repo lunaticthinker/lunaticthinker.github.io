@@ -1,7 +1,6 @@
 ---
 title: The nightmares…
 author: dragos
-type: post
 date: 2012-01-11T12:04:37+00:00
 url: /the-nightmares/
 categories:

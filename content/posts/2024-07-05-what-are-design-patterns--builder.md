@@ -1,16 +1,23 @@
 ---
 title: "Builder Pattern"
-draft: false
-bookHidden: true
+date: 2024-07-05
+categories:
+  - Design Patterns
+tags:
+  - design patterns
+  - creational patterns
+  - builder
+  - architecture
+bookHidden: false
 ---
 
-# Builder Pattern
+The **Builder** pattern is what you reach for when a constructor has become a small novel of parameters and optional flags.
 
-The **Builder** pattern is a creational design pattern that allows you to construct complex objects step by step. It provides a flexible solution to create various representations of an object without complicating the main constructor. This pattern is especially helpful when an object has many optional or configurable properties.
+It’s a creational pattern that lets you construct complex objects step by step, separating _how_ you assemble them from _what_ the final representation looks like. That way you can support multiple configurations without turning your constructors into unreadable beasts.
 
 ## Intent
 
-**The main intent of the Builder pattern is to separate the construction of a complex object from its representation, enabling the creation of different representations through a single process.** This pattern simplifies the process of creating objects with numerous configurations, providing a structured way to build objects with optional parameters.
+**The main intent of the Builder pattern is to separate the construction of a complex object from its representation.** You keep the process consistent while allowing the result to vary.
 
 ## Problem and Solution
 
@@ -33,7 +40,7 @@ The Builder pattern typically includes:
 
 ## UML Diagram
 
-```
+```text
 +-------------------+       +-------------------+
 |   HouseBuilder    |       |    House         |
 |-------------------|       |-------------------|

@@ -1,12 +1,19 @@
 ---
 title: "Chain of Responsibility Pattern"
-draft: false
-bookHidden: true
+date: 2024-07-10
+categories:
+  - Design Patterns
+tags:
+  - design patterns
+  - behavioral patterns
+  - chain of responsibility
+  - architecture
+bookHidden: false
 ---
 
-# Chain of Responsibility Pattern
+The **Chain of Responsibility** pattern is what you reach for when you want to send a request into a pipeline and let whoever can handle it, handle it.
 
-The **Chain of Responsibility** pattern is a behavioral design pattern that allows a request to be passed along a chain of handlers. Each handler decides either to process the request or to pass it to the next handler in the chain. This pattern provides a flexible approach to handling requests, especially when multiple handlers are available.
+It’s a behavioral pattern that lets a request travel through a chain of handlers. Each handler decides whether to process the request or pass it along, which keeps senders decoupled from specific receivers and makes it easy to extend the chain over time.
 
 ## Intent
 
@@ -32,7 +39,7 @@ The Chain of Responsibility pattern typically includes:
 
 ## UML Diagram
 
-```
+```text
 +-------------------+           +------------------+
 |    Handler        |<----------| ConcreteHandler1 |
 |-------------------|           +------------------+

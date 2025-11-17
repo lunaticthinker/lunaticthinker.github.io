@@ -1,7 +1,6 @@
 ---
 title: Railo / ColdFusion – Writing Image to Outpout Stream
 author: dragos
-type: post
 date: 2014-06-03T10:37:35+00:00
 url: /railo-coldfusion-writing-image-to-outpout-stream/
 featured_image: /media/2015/11/dna-structure.jpg

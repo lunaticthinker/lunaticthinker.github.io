@@ -1,6 +1,5 @@
 ---
 title: The controversy of JavaScript runtime environments
-type: post
 date: 2024-05-16T23:39:51+00:00
 url: /the-controversy-of-javascript-runtime-environments/
 featured_image: /media/2015/11/dna-structure.jpg

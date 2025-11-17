@@ -1,7 +1,6 @@
 ---
 title: "Cross Programming Language Encryption – C# vs JavaScript vs Go, Part 4"
 author: admin
-type: post
 date: 2020-06-10T19:59:11+00:00
 url: /cross-programming-language-encryption-c-vs-javascript-vs-go-part-4/
 featured_image: /media/2015/11/dna-structure.jpg

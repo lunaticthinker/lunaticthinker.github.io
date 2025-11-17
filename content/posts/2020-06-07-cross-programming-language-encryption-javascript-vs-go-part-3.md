@@ -1,7 +1,6 @@
 ---
 title: Cross Programming Language Encryption – NodeJs vs Go, Part 3
 author: admin
-type: post
 date: 2020-06-07T02:12:19+00:00
 url: /cross-programming-language-encryption-javascript-vs-go-part-3/
 featured_image: /media/2020/06/dna-structure-node.jpg

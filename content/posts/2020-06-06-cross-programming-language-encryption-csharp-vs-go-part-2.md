@@ -1,7 +1,6 @@
 ---
 title: Cross Programming Language Encryption – CSharp vs Go, Part 2
 author: dragos
-type: post
 date: 2020-06-06T20:00:42+00:00
 url: /cross-programming-language-encryption-csharp-vs-go-part-2/
 featured_image: /media/2020/06/dna-structure-go.jpg

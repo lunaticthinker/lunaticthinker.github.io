@@ -1,7 +1,6 @@
 ---
 title: Ubuntu apt-get update 403 Forbidden
 author: dragos
-type: post
 date: 2012-11-21T09:44:34+00:00
 url: /ubuntu-apt-get-update-403-forbidden/
 featured_image: /media/2012/11/ubuntu-blue-1440x900.jpg

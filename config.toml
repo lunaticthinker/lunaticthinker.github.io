@@ -31,6 +31,9 @@ description = 'Thoughts on code and poetry.'
 defaultTheme = 'auto'
 dateFormat = '2006-01-02'
 mainSections = ['posts']
+enableCCLicense = true
+license = 'CC BY-NC-SA 4.0'
+licenseLink = 'https://creativecommons.org/licenses/by-nc-sa/4.0/'
 
 [params.author]
 name = 'Dragos Cirjan'
@@ -84,6 +87,10 @@ Twitter = ''
 Linkedin = ''
 
 [params.page]
+license = 'CC BY-NC-SA 4.0'
+[params.page.toc]
+enable = true
+auto = true
 [params.page.code]
 copy = true
 maxShownLines = 20
@@ -93,6 +100,15 @@ copyTex = true
 mhchem = false
 [params.page.mermaid]
 enable = true
+[params.page.share]
+enable = true
+Twitter = true
+Facebook = true
+Linkedin = true
+
+[params.navigation]
+inSection = false
+reverse = false
 
 [menu]
 [[menu.main]]
@@ -101,15 +117,15 @@ url = '/posts/'
 weight = 10
 [[menu.main]]
 name = 'Clean Code'
-url = '/docs/clean-code/'
+url = '/categories/clean-code/'
 weight = 15
 [[menu.main]]
 name = 'Coding Principles'
-url = '/docs/coding-principles/'
+url = '/categories/coding-principles/'
 weight = 16
 [[menu.main]]
 name = 'Design Patterns'
-url = '/docs/design-patterns/'
+url = '/categories/design-patterns/'
 weight = 17
 [[menu.main]]
 name = 'About'

@@ -1,6 +1,5 @@
 ---
 title: Where to store uploaded files? File System versus Database storage.
-type: post
 date: 2020-07-23T16:43:42+00:00
 url: /where-to-store-uploaded-files-file-system-versus-database-storage/
 featured_image: /media/2015/11/dna-structure.jpg

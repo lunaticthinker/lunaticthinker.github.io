@@ -1,7 +1,6 @@
 ---
 title: A murit Arthur C. Clarke
 author: dragos
-type: post
 date: 2008-03-19T12:31:04+00:00
 url: /a-murit-arthur-c-clarke/
 categories:

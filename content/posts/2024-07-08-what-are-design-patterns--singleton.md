@@ -1,16 +1,23 @@
 ---
 title: "Singleton Pattern"
-draft: false
-bookHidden: true
+date: 2024-07-08
+categories:
+  - Design Patterns
+tags:
+  - design patterns
+  - creational patterns
+  - singleton
+  - architecture
+bookHidden: false
 ---
 
-# Singleton Pattern
+The **Singleton** pattern is likely the most famous—and most abused—creational pattern.
 
-The **Singleton** pattern is a creational design pattern that restricts the instantiation of a class to one "single" instance. This single instance is globally accessible and can be used wherever it is needed. The Singleton pattern is particularly useful when a single object is required to coordinate actions across a system, such as in logging, configuration, or connection management.
+It restricts a class to a single instance and exposes a global way to access it. Used carefully, it can coordinate things like logging, configuration, or shared connections. Used carelessly, it turns into disguised global state that’s hard to test and reason about.
 
 ## Intent
 
-**The main intent of the Singleton pattern is to ensure a class has only one instance and provide a global point of access to that instance.** This pattern ensures controlled access to resources that must be shared throughout the application.
+**The main intent of Singleton is to guarantee exactly one instance of a type and provide a controlled, global access point to it.**
 
 ## Problem and Solution
 
@@ -35,7 +42,7 @@ The Singleton pattern typically includes:
 
 ## UML Diagram
 
-```
+```text
 +----------------------+
 |      Singleton       |
 |----------------------|

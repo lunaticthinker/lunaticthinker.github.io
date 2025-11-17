@@ -1,7 +1,6 @@
 ---
 title: Dumping object inside cfscript tag
 author: dragos
-type: post
 date: 2013-03-12T10:35:03+00:00
 url: /dumping-a-variable-inside/
 featured_image: /media/2014/03/dna-structure-cfml.png

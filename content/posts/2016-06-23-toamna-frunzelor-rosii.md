@@ -1,7 +1,6 @@
 ---
 title: Toamna frunzelor rosii
 author: dragos
-type: post
 date: 2016-06-23T09:43:33+00:00
 url: /toamna-frunzelor-rosii/
 featured_image: /media/2016/06/WPOTWVineRedLeaves.jpg

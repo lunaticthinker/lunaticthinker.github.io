@@ -1,7 +1,6 @@
 ---
 title: Java Media Framework vs IP Camera JPEG/MJPEG
 author: dragos
-type: post
 date: 2008-04-22T23:12:25+00:00
 url: /java-media-framework-vs-ip-camera-jpegmjpeg/
 featured_image: /media/2010/12/Java_logo-5.jpg

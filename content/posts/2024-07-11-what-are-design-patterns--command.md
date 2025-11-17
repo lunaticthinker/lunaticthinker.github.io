@@ -4,13 +4,19 @@ draft: false
 bookHidden: true
 ---
 
-# Command Pattern
+---
 
-The **Command** pattern is a behavioral design pattern that encapsulates a request as an object, allowing you to parameterize other objects with different requests, queue requests, log them, and implement undoable operations. The Command pattern decouples the sender of a request from the object that performs the action, providing flexibility and extensibility.
+title: "Command Pattern"
+date: 2024-07-11
+categories: - Design Patterns
+tags: - design patterns - behavioral patterns - command - architecture
+bookHidden: false
 
-## Intent
+---
 
-**The main intent of the Command pattern is to encapsulate a request as an object, allowing you to manage and manipulate it independently of the object that created the request.** This pattern is particularly useful for actions that need to be queued, logged, or undone.
+The **Command** pattern is what you use when you want to treat a user action or operation as a first‑class object—something you can queue, log, undo, or replay later.
+
+It’s a behavioral pattern that wraps a request (what to do, with which arguments, against which receiver) into a stand‑alone object. Once the action is packaged this way, it becomes easy to schedule, buffer, or reverse without hard‑wiring everything into a single method call.
 
 ## Problem and Solution
 
@@ -34,7 +40,7 @@ The Command pattern typically includes:
 
 ## UML Diagram
 
-```
+```text
 +-------------------+       +----------------------+
 |    Command        |<------|   ConcreteCommand    |
 |-------------------|       |----------------------|

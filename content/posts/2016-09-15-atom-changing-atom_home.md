@@ -1,7 +1,6 @@
 ---
 title: Atom – Changing ATOM_HOME
 author: dragos
-type: post
 date: 2016-09-15T08:41:57+00:00
 url: /atom-changing-atom_home/
 featured_image: /media/2016/05/atom.jpg

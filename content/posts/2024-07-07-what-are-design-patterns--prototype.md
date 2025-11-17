@@ -1,16 +1,23 @@
 ---
 title: "Prototype Pattern"
-draft: false
-bookHidden: true
+date: 2024-07-07
+categories:
+  - Design Patterns
+tags:
+  - design patterns
+  - creational patterns
+  - prototype
+  - cloning
+bookHidden: false
 ---
 
-# Prototype Pattern
+The **Prototype** pattern is what you reach for when “just call the constructor again” is too expensive—or too painful to configure repeatedly.
 
-The **Prototype** pattern is a creational design pattern that enables object creation by cloning existing instances. Instead of creating new instances from scratch, the Prototype pattern allows objects to be duplicated, reducing the need to repeat expensive initialization processes. This pattern is ideal when object creation is costly, complex, or involves significant configuration.
+Instead of creating new instances from scratch, you clone an existing, fully configured object and tweak the result. It’s a creational pattern that trades construction complexity for cheap copying.
 
 ## Intent
 
-**The main intent of the Prototype pattern is to specify the kinds of objects to create using a prototypical instance, allowing new objects to be created by copying this prototype.** This pattern helps reduce the overhead of creating new instances by cloning pre-configured objects.
+**The main intent of Prototype is to define new objects by copying an existing exemplar (the prototype) instead of rebuilding configuration from zero every time.**
 
 ## Problem and Solution
 
@@ -32,7 +39,7 @@ The Prototype pattern typically includes:
 
 ## UML Diagram
 
-```
+```text
 +-------------------+
 |   Prototype       |
 |-------------------|

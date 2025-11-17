@@ -1,7 +1,6 @@
 ---
 title: Masa tacerii
 author: dragos
-type: post
 date: 2008-03-13T11:59:51+00:00
 url: /masa-tacerii/
 categories:

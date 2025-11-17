@@ -1,7 +1,6 @@
 ---
 title: Dimineata fumez vise
 author: dragos
-type: post
 date: 2008-03-16T01:45:40+00:00
 url: /dimineata-fumez-vise/
 featured_image: /media/2008/03/women_smoking_black_cigarettes_desktop_1440x900_wallpaper-396834.jpg

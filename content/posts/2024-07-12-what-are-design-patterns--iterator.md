@@ -4,13 +4,19 @@ draft: false
 bookHidden: true
 ---
 
-# Iterator Pattern
+---
 
-The **Iterator** pattern is a behavioral design pattern that provides a way to access the elements of a collection sequentially without exposing the collection's underlying structure. The Iterator pattern decouples the traversal logic from the collection itself, making it easier to use and extend.
+title: "Iterator Pattern"
+date: 2024-07-12
+categories: - Design Patterns
+tags: - design patterns - behavioral patterns - iterator - collections
+bookHidden: false
 
-## Intent
+---
 
-**The main intent of the Iterator pattern is to allow sequential access to elements in a collection without exposing its internal structure.** This pattern provides a standard interface for iterating through a collection, enabling different traversal strategies and making collections interchangeable.
+The **Iterator** pattern is the reason you can loop over a collection without knowing or caring how it stores its data.
+
+It’s a behavioral pattern that provides a standard way to traverse elements in a collection while hiding the underlying representation. Traversal logic lives in its own object, so collections stay focused on storage and iterators handle walking through items.
 
 ## Problem and Solution
 
@@ -33,7 +39,7 @@ The Iterator pattern typically includes:
 
 ## UML Diagram
 
-```
+```text
 +-------------------+           +-------------------------+
 |      Iterator     |<----------|       ConcreteIterator  |
 |-------------------|           +-------------------------+

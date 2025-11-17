@@ -1,7 +1,6 @@
 ---
 title: Convert camelCase to Underscores Using sed (mod)
 author: dragos
-type: post
 date: 2009-12-08T06:14:03+00:00
 url: /en-convert-camelcase-to-underscores-using-sed-mod/
 featured_image: /media/2009/12/bash.jpg

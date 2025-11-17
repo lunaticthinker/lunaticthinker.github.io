@@ -1,7 +1,6 @@
 ---
 title: Fluturi blestemati
 author: dragos
-type: post
 date: 2012-11-18T23:39:17+00:00
 url: /fluturi-blestemati/
 categories:

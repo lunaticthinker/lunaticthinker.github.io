@@ -1,7 +1,6 @@
 ---
 title: 3DES Encryption with PHP
 author: dragos
-type: post
 date: 2015-11-25T14:21:37+00:00
 url: /3des-encryption-with-php/
 featured_image: /media/2015/11/dna-structure.jpg

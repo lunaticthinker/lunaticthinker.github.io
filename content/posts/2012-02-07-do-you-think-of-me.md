@@ -1,7 +1,6 @@
 ---
 title: Do you think of me?
 author: dragos
-type: post
 date: 2012-02-06T21:25:15+00:00
 url: /do-you-think-of-me/
 categories:

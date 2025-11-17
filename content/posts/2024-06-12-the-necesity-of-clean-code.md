@@ -1,6 +1,5 @@
 ---
 title: The Necessity of Clean Code
-type: post
 date: 2024-06-12
 slug: the-necessity-of-clean-code
 description: Why clean code is foundational for sustainable delivery and long-term engineering velocity.

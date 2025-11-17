@@ -1,7 +1,6 @@
 ---
 title: Mendeleev is overrated!
 author: dragos
-type: post
 date: 2011-02-02T13:01:29+00:00
 url: /mendeleev-is-overrated/
 categories:

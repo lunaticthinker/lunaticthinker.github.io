@@ -1,16 +1,23 @@
 ---
 title: "Factory Method Pattern"
-draft: false
-bookHidden: true
+date: 2024-07-06
+categories:
+  - Design Patterns
+tags:
+  - design patterns
+  - creational patterns
+  - factory method
+  - architecture
+bookHidden: false
 ---
 
-# Factory Method Pattern
+The **Factory Method** pattern is the one you use when you want to say “give me a transport,” not “new Truck()” or “new Ship()”.
 
-The **Factory Method** pattern is a creational design pattern that defines an interface for creating objects but allows subclasses to decide which class to instantiate. This pattern lets a class defer instantiation to subclasses, promoting flexibility and loose coupling in the codebase.
+It defines an interface for creating objects but lets subclasses decide which concrete type to produce. Instantiation is deferred to specific factories, which keeps your high-level code less entangled with concrete classes and more open to extension.
 
 ## Intent
 
-**The main intent of the Factory Method pattern is to define a method in a superclass for creating objects but to let subclasses determine the specific class of object that will be instantiated.** This pattern provides a way to create objects without specifying their exact type in the code.
+**The main intent of Factory Method is to move the “which concrete type?” decision into dedicated creators.** Your core logic works with the `Transport` interface; factories decide whether that’s a truck, ship, or something new.
 
 ## Problem and Solution
 
@@ -33,7 +40,7 @@ The Factory Method pattern typically includes:
 
 ## UML Diagram
 
-```
+```text
 +------------------+           +--------------------+
 |    Transport     |           |    TransportFactory|
 |------------------|           |--------------------|

@@ -1,6 +1,5 @@
 ---
 title: "A TypeScript RESTful API Using Design Patterns, Creational"
-type: post
 date: 2024-11-11
 categories:
   - Home Page

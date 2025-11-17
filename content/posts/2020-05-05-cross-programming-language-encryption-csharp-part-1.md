@@ -1,7 +1,6 @@
 ---
 title: Cross Programming Language Encryption – CSharp, Part 1
 author: dragos
-type: post
 date: 2020-05-05T08:04:07+00:00
 url: /cross-programming-language-encryption-csharp-part-1/
 featured_image: /media/2020/05/dna-structure-csharp.jpg

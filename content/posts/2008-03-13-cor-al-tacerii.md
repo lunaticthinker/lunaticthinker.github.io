@@ -1,7 +1,6 @@
 ---
 title: Cor al tacerii
 author: dragos
-type: post
 date: 2008-03-13T11:59:21+00:00
 url: /cor-al-tacerii/
 categories:

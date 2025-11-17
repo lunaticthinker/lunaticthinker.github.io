@@ -1,7 +1,6 @@
 ---
 title: Pictand Rasarituri
 author: dragos
-type: post
 date: 2016-01-13T23:20:36+00:00
 url: /pictand-rasarituri/
 featured_image: /media/2016/01/image.jpg

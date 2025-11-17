@@ -1,7 +1,6 @@
 ---
 title: A thief I am… I should be
 author: dragos
-type: post
 date: 2012-01-26T23:30:45+00:00
 url: /a-thief-i-am-i-should-be/
 categories:

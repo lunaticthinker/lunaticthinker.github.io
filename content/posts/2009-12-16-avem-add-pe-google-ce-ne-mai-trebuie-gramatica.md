@@ -1,7 +1,6 @@
 ---
 title: Avem add pe google, ce ne mai trebuie gramatica…
 author: dragos
-type: post
 date: 2009-12-16T05:46:49+00:00
 url: /avem-add-pe-google-ce-ne-mai-trebuie-gramatica/
 aktt_notify_twitter:

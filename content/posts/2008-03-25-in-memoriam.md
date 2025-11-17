@@ -1,7 +1,6 @@
 ---
 title: In memoriam…
 author: dragos
-type: post
 date: 2008-03-25T21:04:16+00:00
 url: /in-memoriam/
 categories:

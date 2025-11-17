@@ -1,26 +1,33 @@
 ---
 title: "Memento Pattern"
-draft: false
-bookHidden: true
+date: 2024-07-15
+categories:
+    - Design Patterns
+tags:
+    - design patterns
+    - behavioral patterns
+    - memento
+    - undo
+bookHidden: false
 ---
 
-# Memento Pattern
+Sometimes you just want to hit undo and pretend the last few minutes never happened — in your editor, not in life (unfortunately). That’s exactly the kind of problem the **Memento** pattern is designed to solve.
 
-The **Memento** pattern is a behavioral design pattern that allows an object to save and restore its state without exposing its internal structure. This pattern is particularly useful for implementing undo/redo functionality, as it captures an object’s state at a specific moment and allows it to be restored later.
+Memento is a behavioral design pattern that lets an object save and later restore its internal state without exposing how it works inside. It’s the pattern behind familiar features like undo/redo, snapshots, checkpoints, and “restore previous version”.
 
 ## Intent
 
-**The main intent of the Memento pattern is to capture and externalize an object’s internal state so that it can be restored later without violating encapsulation.** By storing snapshots of an object’s state, this pattern enables undo and redo operations, making it ideal for applications like text editors or graphical editors.
+Capture and externalize an object’s internal state so that it can be restored later **without breaking encapsulation**. Instead of sprinkling custom undo logic everywhere, you take snapshots of state and roll back to them when needed.
 
 ## Problem and Solution
 
 ### Problem
 
-Imagine a text editor where users can type text and use the undo function to revert to a previous state. Without a way to store and restore the state of the editor, implementing an undo function would be difficult, requiring complex logic to track every change.
+Imagine a text editor where users can type freely and then undo changes. Without a clean way to store and restore state, you’d end up tracking every tiny modification, or worse, hard‑coding “undo” logic into every operation. It quickly becomes a mess.
 
 ### Solution
 
-The Memento pattern solves this problem by capturing snapshots (mementos) of the editor’s state at specific points in time. When the user performs an undo, the editor can restore a previous state from its saved mementos. This design keeps the internal details of the editor hidden from external objects, adhering to the principle of encapsulation.
+With Memento, the editor simply takes snapshots (mementos) of its state at meaningful points in time. When the user hits undo, the editor restores a previous snapshot. The rest of the system never needs to know what “state” means for the editor — it just stores and passes around opaque memento objects.
 
 ## Structure
 
@@ -32,7 +39,7 @@ The Memento pattern typically includes:
 
 ## UML Diagram
 
-```
+```text
 +-------------------+       +-------------------+
 |    Originator     |       |    Memento        |
 |-------------------|       |-------------------|
@@ -50,9 +57,9 @@ The Memento pattern typically includes:
 +-------------------+
 ```
 
-## Example: Text Editor with Undo Functionality
+## Example: Text Editor with Undo
 
-Let’s implement a simple text editor with undo functionality using the Memento pattern. The editor will save states after each edit and allow users to undo changes by restoring previous states.
+Let’s walk through a simple text editor with undo functionality using Memento. The editor saves its content after each important edit and can roll back to previous versions.
 
 ### Step 1: Define the Memento Class
 

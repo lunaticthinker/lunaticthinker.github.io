@@ -1,26 +1,35 @@
 ---
 title: "Visitor Pattern"
-draft: false
-bookHidden: true
+date: 2024-07-20
+categories:
+    - Design Patterns
+tags:
+    - design patterns
+    - behavioral patterns
+    - visitor
+    - extensibility
+bookHidden: false
 ---
 
-# Visitor Pattern
+Every time you think “I need to run a bunch of different operations over this object hierarchy, but I really don’t want to keep changing those classes”, you’re in Visitor territory.
 
-The **Visitor** pattern is a behavioral design pattern that allows adding new operations to a group of related classes without modifying their structure. This pattern enables you to define operations that can be applied to various objects in a class hierarchy, decoupling the operations from the objects they operate on.
+The **Visitor** pattern is a behavioral design pattern that lets you add new operations to a group of related classes *without* modifying their source. Operations live in visitor classes; your data structures just agree to “accept” them.
 
 ## Intent
 
-**The main intent of the Visitor pattern is to separate an algorithm from the object structure on which it operates, enabling new operations to be added without modifying the structure.** This pattern is useful for extending functionality without changing the underlying classes, adhering to the Open-Closed Principle.
+Separate algorithms from the object structure they operate on so you can add new operations without changing existing classes. The classes stay stable; visitors carry the evolving behavior.
 
 ## Problem and Solution
 
 ### Problem
 
-Imagine a tax application that calculates taxes on different types of assets, such as stocks, real estate, and bonds. Each asset has unique tax rules, and adding or modifying tax calculations can become complex, especially if they are tightly coupled to each asset class. Without the Visitor pattern, you would need to alter each asset class whenever a new tax rule is added, leading to a less flexible design.
+Imagine a tax engine that needs to calculate taxes on different types of assets: stocks, real estate, bonds, maybe more in the future. Each asset has its own rules.
+
+If you keep adding tax methods directly onto asset classes, every new rule means editing every relevant class. Over time, those classes become bloated with unrelated logic.
 
 ### Solution
 
-The Visitor pattern addresses this by placing tax calculations in a separate visitor class. Each asset accepts the visitor, which then performs the appropriate tax calculations. This approach allows for easy addition of new calculations without modifying the asset classes, making it simple to extend functionality.
+With Visitor, you move those tax calculations into a separate visitor class. Assets just implement an `accept` method that calls back into the visitor. When tax rules change or new reporting features show up, you add a new visitor instead of touching each asset type.
 
 ## Structure
 
@@ -33,7 +42,7 @@ The Visitor pattern typically includes:
 
 ## UML Diagram
 
-```
+```text
 +-------------------+            +-------------------+
 |     Visitor       |<-----------|  ConcreteVisitor  |
 |-------------------|            +-------------------+

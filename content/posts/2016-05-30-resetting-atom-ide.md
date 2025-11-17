@@ -1,7 +1,6 @@
 ---
 title: Resetting Atom IDE
 author: dragos
-type: post
 date: 2016-05-30T07:25:08+00:00
 url: /resetting-atom-ide/
 featured_image: /media/2016/05/atom.jpg

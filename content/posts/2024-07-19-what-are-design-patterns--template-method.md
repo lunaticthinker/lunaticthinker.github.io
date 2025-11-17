@@ -1,26 +1,39 @@
 ---
 title: "Template Method Pattern"
-draft: false
-bookHidden: true
+date: 2024-07-19
+categories:
+    - Design Patterns
+tags:
+    - design patterns
+    - behavioral patterns
+    - template method
+    - inheritance
+bookHidden: false
 ---
 
-# Template Method Pattern
+If you’ve ever created a base class with a `run()` method that calls a series of steps, then let subclasses override only a few of those steps, you’ve already reinvented the **Template Method** pattern.
 
-The **Template Method** pattern is a behavioral design pattern that defines the structure (or skeleton) of an algorithm in a superclass, allowing subclasses to implement or override specific steps of the algorithm without altering its overall structure. This pattern promotes reuse by centralizing the common parts of the algorithm and leaving the customizable steps to subclasses.
+Template Method is a behavioral pattern that defines the skeleton of an algorithm in a superclass, while allowing subclasses to customize specific steps. The overall flow stays the same; the details can vary.
 
 ## Intent
 
-**The main intent of the Template Method pattern is to define an algorithm’s structure in a method, deferring some steps to subclasses, which can override specific parts of the algorithm.** This pattern helps enforce consistency in the algorithm’s structure while still allowing flexibility in individual steps.
+Define an algorithm’s structure in one place (a template method) and let subclasses override selected steps without changing the overall flow. You get consistent workflows with customizable hooks.
 
 ## Problem and Solution
 
 ### Problem
 
-Suppose you’re building a document generation system that produces reports in different formats (e.g., PDF, HTML, and CSV). Each format has a unique way of presenting data, but the general structure of generating a report is the same: gather data, format it, and export it. Without a way to define the common structure in one place, each report format would need to duplicate parts of the algorithm, making the system harder to maintain.
+Imagine a reporting system that generates PDF, HTML, and CSV reports. Every report follows the same high‑level steps:
+
+1. Gather data
+2. Format it
+3. Export it
+
+Without a shared template, each report class tends to re‑implement the full workflow, duplicating logic and making changes painful.
 
 ### Solution
 
-The Template Method pattern addresses this problem by defining the general structure of the report generation algorithm in a superclass, with customizable steps for each format (e.g., formatting and exporting). Each report format can override these steps as needed, enabling different formats without duplicating the core logic.
+Template Method moves the shared workflow into an abstract base class and defines a `generateReport()` method that calls the steps in order. Concrete reports only override what’s different — for example, how they format or export. The algorithm lives in one place; behavior differences live in subclasses.
 
 ## Structure
 
@@ -32,7 +45,7 @@ The Template Method pattern typically includes:
 
 ## UML Diagram
 
-```
+```text
 +---------------------------+
 |      AbstractClass        |
 |---------------------------|

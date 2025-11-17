@@ -1,7 +1,6 @@
 ---
 title: Larg închis
 author: dragos
-type: post
 date: 2016-06-23T09:58:43+00:00
 url: /larg-inchis/
 categories:
