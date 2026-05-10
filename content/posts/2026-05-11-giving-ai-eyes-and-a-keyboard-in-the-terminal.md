@@ -1,6 +1,6 @@
 ---
 title: Giving AI Eyes and a Keyboard in the Terminal
-date: 2026-05-11T00:00:00Z
+date: 2026-05-10T00:00:00Z
 slug: giving-ai-eyes-and-a-keyboard-in-the-terminal
 summary: "How I built mcp-tuikit to give AI agents a virtual terminal, enabling them to visually test TUIs, take screenshots, and send keystrokes."
 categories:
