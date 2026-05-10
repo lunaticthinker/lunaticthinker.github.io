@@ -139,3 +139,9 @@ weight = 30
 name = 'Categories'
 url = '/categories/'
 weight = 40
+
+[params.analytics]
+enable = true
+[params.analytics.umami]
+data_website_id = 'a1cda0fd-a187-4f67-a744-1404743d0d04'
+src = 'https://umami-35a68b34.trilulila.ro/script.js'
